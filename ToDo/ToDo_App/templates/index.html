@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{%block body%}
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body> -->
+    <h2><center><u>ToDo Application</u></center></h2>
+    <h5 style="margin-left: 100px;margin-top:20px;" class="text text-warning-emphasis fst-italic" >Welcome to {{request.user}}</h5>
+    <center><form action="" method="post" name="rs">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button class="btn btn-secondary" >Add</button><br><br><br>
+        </form></center>
+        <div class="container shadow p-3 mb-5 bg-body-tertiary rounded">
+        <table class="table table-striped">
+            <th>Task</th>
+            <th>Status</th>
+            <th>Update</th>
+            <th>Delete</th>
+            
+        {% for i in data %}
+        <tr>
+        <td>{{i.name}}</td>
+        {% if i.complete == False %}
+        <td><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg></td>
+        <!-- <td>{{i.complete}}</td> -->
+        {% elif i.complete == True %}
+        <td><svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg></td> 
+        {% endif %}
+        {% if i.complete == False %}
+        <td><a class="btn btn-danger" href="{% url 'edit' i.id %}">Not completed</a></td>
+        {% elif i.complete == True %}
+        <td><a class="btn btn-success" href="{% url 'edit' i.id %}">Completed</a></td>
+        {% endif %}
+        <td><a class="btn btn-danger" href="{% url 'dlt' i.id %}">Delete</a></td>
+       </tr>
+        {% endfor %}
+        </table>
+    </div>
+<!-- </body>
+</html> -->
+{%endblock%}
